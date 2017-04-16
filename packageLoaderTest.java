@@ -4,7 +4,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class packageLoaderTest{
-      
+         
     @Test
     public void whenGivenAnArrayOfOneValueNoDependenciesItShouldReturnThatValue() {
         String [] testInput = new String [] {"Megan Package:"};
@@ -12,14 +12,20 @@ public class packageLoaderTest{
     }
     
     @Test
-    public void whenGivenAnArrayOfOneValueWithDependenciesItShouldReturnValueCommaDependency() {
+    public void whenGivenAnArrayOfOneValueWithDependenciesItShouldReturnDependencyValue() {
         String [] testInput = new String [] {"KittenService: CamelCaser"};
-        assertEquals("KittenService, CamelCaser", packageLoader.createOrderedList(testInput));
+        assertEquals("CamelCaser, KittenService", packageLoader.createOrderedList(testInput));
     }
     
     @Test
-    public void whenGivenAnArrayOfTwoValuesWithNoDependenciesItShouldReturnValueCommaValue() {
+    public void whenGivenAnArrayOfTwoValuesWithNoDependenciesItShouldReturnValueValue() {
         String [] testInput = new String [] {"KittenService: ", "CamelCaser: "};
         assertEquals("KittenService, CamelCaser", packageLoader.createOrderedList(testInput).toString());
+    }
+    
+    @Test
+    public void whenGivenAnArrayOfTwoValuesWithandWithoutDependenciesItShouldReturnDependencyDependencyValue() {
+        String [] testInput = new String [] {"KittenService: CamelCaser", "CamelCaser: "};
+        assertEquals("CamelCaser, KittenService", packageLoader.createOrderedList(testInput).toString());
     }
 }
